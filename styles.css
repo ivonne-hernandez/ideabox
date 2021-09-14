@@ -30,3 +30,17 @@
   width: 10px;
   height: 10px;
 }
+
+.idea-grid {
+  background-color: EAEAF4
+  display: grid;
+  grid-template-columns: 1fr 7fr;
+
+}
+
+.box {
+  height: 100px;
+  width: 100px;
+  margin: 10px 10px 10px 10px;
+  border: 1px solid black;
+}
