@@ -16,6 +16,11 @@
   height: 100%;
 }
 
+.starred-idea-button {
+  background-color: #5356A4;
+  color: #E9E9F3;
+}
+
 .main-page-form {
     font-family: 'Open Sans';
     font-weight: 100;
