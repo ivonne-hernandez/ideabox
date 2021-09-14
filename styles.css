@@ -1,0 +1,32 @@
+/* .main-page-form { */
+.main-page-form {
+    font-family: 'Open Sans', Bold;
+    color: #1F1F3D;
+    background-color: #A9AAD2;
+    border: 1px solid black;
+}
+
+.main-input-box {
+  border: 1px solid #E9E9F3;
+  border-radius: 1px;
+}
+
+.main-input-save {
+  /* fix font thickness */
+  font-family: 'Open Sans', Bold;
+  font-weight: bold;
+/* color darker? */
+  background-color: #1F1F3D;
+  color: #EAEAF4;
+  display: flex;
+  justify-content: center;
+  width: 20%;
+  border-radius: 3px;
+}
+
+.main-search {
+  color: white;
+  background-color: #1F1F3D;
+  width: 10px;
+  height: 10px;
+}
