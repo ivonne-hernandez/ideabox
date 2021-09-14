@@ -1,9 +1,28 @@
-/* .main-page-form { */
+* {
+  font-family: 'Open Sans';
+}
+/* .container{
+  display: flex;
+} */
+
+.filter-starred-ideas {
+  border: 2px solid white;
+}
+.sidebar {
+  background-color: #1F1F3D;
+  color:#FFFFFF;
+  width: 300px;
+  position: fixed;
+  height: 100%;
+}
+
 .main-page-form {
-    font-family: 'Open Sans', Bold;
+    font-family: 'Open Sans';
+    font-weight: 100;
     color: #1F1F3D;
     background-color: #A9AAD2;
     border: 1px solid black;
+    margin-left: 300px;
 }
 
 .main-input-box {
@@ -32,7 +51,7 @@
 }
 
 .idea-grid {
-  background-color: EAEAF4
+  background-color: #EAEAF4;
   display: grid;
   grid-template-columns: 1fr 7fr;
 
