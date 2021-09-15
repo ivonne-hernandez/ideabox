@@ -9,6 +9,8 @@ main {
 body {
   margin: 0px;
   background-color: #EAEAF4;
+  box-sizing: border-box;
+  margin-bottom: 0.75rem;
 }
 
 main {
@@ -20,14 +22,19 @@ aside {
   font-family: "Open Sans";
   background-color: #1F1F3D;
   color:#FFFFFF;
-  width: 30%;
+  width: 20%;
   /* height: 100%; */
   flex-direction: column;
 
 }
 
-aside > h1 {
+aside > h4 {
   padding-left: 1rem;
+}
+
+label {
+  font-family: "Open Sans";
+  font-weight: bold;
 }
 
 
@@ -37,7 +44,7 @@ aside > h1 {
 }
 
 .form-container {
-  width: 100%;
+  width: 80%;
 }
 
 .filter-starred-ideas {
@@ -65,16 +72,24 @@ aside > h1 {
     border: 1px solid black;
     display: flex;
     width: 100%;
-    height: 35%;
+    height: 45%;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
 
+.main-input-title {
+  border: 1px solid #353567;
+  border-radius: 1px;
+  height: 5%;
+  width: 25%;
 }
 
 .main-input-box {
-  border: 1px solid #E9E9F3;
+  border: 1px solid #353567;
   border-radius: 1px;
+  height: 20%;
+  width: 25%;
 }
 
 .main-input-save {
@@ -84,10 +99,13 @@ aside > h1 {
 /* color darker? */
   background-color: #1F1F3D;
   color: #EAEAF4;
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   width: auto;
   border-radius: 3px;
+  padding-right: 130px;
+  padding-left: 130px;
+  margin-top: 0.75rem;
 }
 
 .main-search {
@@ -95,10 +113,11 @@ aside > h1 {
   background-color: #1F1F3D;
   width: 10px;
   height: 10px;
+  margin-top: 0.75rem;
+
 }
 
 .idea-container {
-  height: 100%;
   width: 100%;
   margin: 0px;
 }
