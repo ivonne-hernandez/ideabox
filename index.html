@@ -7,48 +7,48 @@
     <title>Idea Box</title>
   </head>
   <body>
-    <main class="container">
-      <aside class="sidebar">
-        <h1>IdeaBox</h1>
-        <div class="filter-starred-ideas">
-          <h4> Filter Starred Ideas</h4>
-          <button class="starred-idea-button" id="starred-button"><h3>Show Starred Ideas</h3></button>
-        </div>
-      </aside>
-      <section class="form-container">
-        <section class="main-page-form">
-          <label>Title</label>
-            <input type="text" class="main-input-title" id="user-title"/>
-          <label>Body</label>
-            <input type="text" class="main-input-box" id="user-body"/>
-          <div class="main-save-button">
-            <!-- change this class name later  -->
-            <button class="main-input-save" id="save-button"> Save </button>
-          </div>
-          <div class="search-container">
-            <input type="image" class="main-search" id="search-button" type="image" src="./assets/search.svg" alt="search-icon"/>
+    <aside class="sidebar">
+      <h1>IdeaBox</h1>
+      <div class="filter-starred-ideas">
+        <h4> Filter Starred Ideas</h4>
+        <button class="starred-idea-button" id="starred-button">Show Starred Ideas</button>
+      </div>
+    </aside>
+    <main class="form-container">
+      <form class="main-page-form">
+        <label for="user-title" class="form-element">Title</label>
+        <input type="text" class="main-input-title form-element" id="user-title"/>
+        <label for="user-body" class="form-element">Body</label>
+        <textarea class="main-input-box form-element" id="user-body"></textarea>
+          <!-- change this class name later  -->
+        <button class="main-input-save form-element" id="save-button">
+          Save
+        </button>
+        <div class="form-element">
+          <span class="search-container">
+            <img src="./assets/search.svg" class="search-icon" alt="search-icon"/>
             <input type="text" class="search-box" id="search-box" placeholder="Search ideas"/>
+          </span>
+        </div>
+      </form>
+      <section class="idea-container">
+        <div class="box-container">
+          <div class="box-header-container">
+            <button class="star-btn"><img src="./assets/star-active.svg"></button>
+            <button class="delete-btn"><img src="./assets/delete.svg"></button>
           </div>
-        </section>
-        <section class="idea-container">
-          <div class="box-container">
-            <div class="box-header-container">
-              <button class="star-btn"><img src="./assets/star-active.svg"></button>
-              <button class="delete-btn"><img src="./assets/delete.svg"></button>
-            </div>
-            <div class="title-body-container">
-              <label class="idea-title">Idea title</label>
-              <div class="idea-body-container">
-                <p class"idea-body">Idea body. Don't ever play yourself. Every chance I get, I water the plants, Lion! Cloth talk.</p>
-              </div>
-            </div>
-            <div class="box-footer-container">
-              <button class="comment-btn"><img src="./assets/comment.svg"></button>
-              <label class="comment-label">Comment</label>
+          <div class="title-body-container">
+            <label class="idea-title">Idea title</label>
+            <div class="idea-body-container">
+              <p class"idea-body">Idea body. Don't ever play yourself. Every chance I get, I water the plants, Lion! Cloth talk.</p>
             </div>
           </div>
+          <div class="box-footer-container">
+            <button class="comment-btn"><img src="./assets/comment.svg"></button>
+            <label class="comment-label">Comment</label>
+          </div>
+        </div>
       </section>
-    </section>
     </main>
   </body>
 </html>
