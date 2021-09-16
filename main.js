@@ -1,6 +1,7 @@
 var titleInput = document.querySelector('.main-input-title');
 var bodyInput = document.querySelector('.main-input-body');
 var saveButton = document.querySelector('.main-input-save');
+var ideaCardGrid = document.querySelector('.idea-container');
 
 
 
@@ -18,12 +19,13 @@ var ideas = [];
 
 //Event Handlers Go Here 👇
 function createIdeaCard(event) {
-  console.log("it works")
   event.preventDefault();
   validateUserInput();
   var savedIdea = new Idea(titleInput.value, bodyInput.value)
+  ideas.push(savedIdea);
+  displayCard();
 }
-  //if user input fields true, create instance of Idea class, .push into ideas[]
+//if user input fields true, create instance of Idea class, .push into ideas[]
 
 
 function validateUserInput() {
@@ -39,8 +41,29 @@ function validateUserInput() {
 
 
 function displayCard() {
-  // when user saves card, fire this function to display new instance on the DOM, inside of a card
+  var savedIdea = new Idea(titleInput.value, bodyInput.value)
+  ideas.push(savedIdea);
+  ideaCardGrid.innerHTML +=
+    `<div class="box-container">
+    <div class="box-header-container">
+      <button class="star-btn"><img src="./assets/star-active.svg"></button>
+      <button class="delete-btn"><img src="./assets/delete.svg"></button>
+    </div>
+    <div class="title-body-container">
+      <label class="idea-title">${savedIdea.title}</label>
+      <div class="idea-body-container">
+        <p class"idea-body">${savedIdea.body}</p>
+      </div>
+    </div>
+    <div class="box-footer-container">
+      <button class="comment-btn"><img src="./assets/comment.svg"></button>
+      <label class="comment-label">Comment</label>
+    </div>
+  </div>`
 }
+
+  // when user saves card, fire this function to display new instance on the DOM, inside of a card
+
 
 // As a user,
 //
