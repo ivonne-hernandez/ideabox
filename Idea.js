@@ -6,4 +6,3 @@ class Idea {
     this.star = false;
   }
 }
-}
