@@ -6,10 +6,11 @@ var ideaCardGrid = document.querySelector('.idea-container');
 
 
 //Event Listeners Go Here 👇
-saveButton.addEventListener('click', validateUserInput);
+saveButton.addEventListener('click', createIdeaCard);
 ideaCardGrid.addEventListener('click', handleIdeaCardGridClick);
 titleInput.addEventListener('keyup', validateUserInput);
 bodyInput.addEventListener('keyup', validateUserInput);
+
 
 var ideas = [];
 
@@ -34,7 +35,7 @@ function createIdeaCard(event) {
     bodyInput.value = "";
   }
 }
-
+//make another change;
 //if user input fields true, create instance of Idea class, .push into ideas[]
 // when user attempts to click the save button w/o both fields filled out:
 //the respective box should fill with a message (in red text) that says "Please enter a title/body"
