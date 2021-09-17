@@ -20,12 +20,6 @@ function createIdeaCard(event) {
 
   var userTitle = titleInput.value;
   var userBody = bodyInput.value;
-
-  if (!userTitle || !userBody) {
-    return;
-  }
-
-  validateUserInput();
   var savedIdea = new Idea(titleInput.value, bodyInput.value);
   ideas.push(savedIdea);
   displayCards();
@@ -33,6 +27,7 @@ function createIdeaCard(event) {
   if(titleInput && bodyInput){
     titleInput.value = "";
     bodyInput.value = "";
+    saveButton.disabled = true;
   }
 }
 //make another change;
