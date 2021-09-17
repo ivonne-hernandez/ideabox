@@ -68,7 +68,7 @@ function displayCards() {
     ideaCardGrid.innerHTML +=
     `<div class="box-container" id="${ideas[i].id}">
       <div class="box-header-container">
-        <button class="star-btn"><img src="./assets/star-active.svg"></button>
+        <button class="star-btn"><img src="./assets/star.svg"></button>
         <button class="delete-btn"><img src="./assets/delete.svg"></button>
       </div>
       <div class="title-body-container">
