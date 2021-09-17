@@ -4,7 +4,7 @@
 
 html,
 body {
-  width:100%;
+  width: 100%;
   height: 100%;
 }
 
@@ -25,12 +25,12 @@ h1 {
 aside {
   font-family: "Open Sans";
   background-color: #1F1F3D;
-  color:#FFFFFF;
+  color: #FFFFFF;
   width: 20%;
   flex-direction: column;
 }
 
-aside > h4 {
+aside>h4 {
   padding-left: 1rem;
 }
 
@@ -89,7 +89,7 @@ label {
   height: 25px;
 }
 
-.main-input-box {
+.main-input-body {
   border: 1px solid #353567;
   border-radius: 1px;
   height: 20%;
@@ -100,7 +100,7 @@ label {
   /* fix font thickness */
   font-family: 'Open Sans', Bold;
   font-weight: bold;
-/* color darker? */
+  /* color darker? */
   background-color: #1F1F3D;
   color: #EAEAF4;
   width: 100%;
@@ -108,18 +108,27 @@ label {
   margin-top: 0.75rem;
 }
 
+.main-input-save:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
+
 .search-icon {
   color: white;
   padding: 2px;
   background-color: #1F1F3D;
   width: 22px;
-  height: 25px ;
+  height: 25px;
 }
 
 .idea-container {
   width: 100%;
   margin: 0px;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+  padding: 20px;
 }
 
 .box-container {
@@ -155,11 +164,11 @@ label {
 }
 
 .title-body-container {
- height: 12rem;
- background-color: #FFFFFF;
- display: flex;
- flex-direction: column;
- font-size: 19px;
+  height: 12rem;
+  background-color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  font-size: 19px;
 }
 
 .idea-title {
@@ -171,6 +180,7 @@ label {
   height: 8rem;
   font-family: "Open Sans";
   font-size: 20px;
+  word-wrap: break-word;
 }
 
 p {
@@ -203,4 +213,8 @@ p {
   width: 60%;
   display: block;
   margin: auto;
+}
+
+.hidden {
+  display: none !important;
 }
