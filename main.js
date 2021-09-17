@@ -1,39 +1,67 @@
 var titleInput = document.querySelector('.main-input-title');
 var bodyInput = document.querySelector('.main-input-body');
-var saveButton = document.querySelector('.main-input-save');
+var saveButton = document.querySelector('#save-button');
 var ideaCardGrid = document.querySelector('.idea-container');
 
 
 
-
-
-
 //Event Listeners Go Here 👇
-saveButton.addEventListener('click', createIdeaCard);
+saveButton.addEventListener('click', validateUserInput);
 ideaCardGrid.addEventListener('click', handleIdeaCardGridClick);
+titleInput.addEventListener('keyup', validateUserInput);
+bodyInput.addEventListener('keyup', validateUserInput);
 
 var ideas = [];
 
 //Event Handlers Go Here 👇
 function createIdeaCard(event) {
   event.preventDefault();
+
+  var userTitle = titleInput.value;
+  var userBody = bodyInput.value;
+
+  if (!userTitle || !userBody) {
+    return;
+  }
+
   validateUserInput();
   var savedIdea = new Idea(titleInput.value, bodyInput.value);
   ideas.push(savedIdea);
   displayCards();
   savedIdea.saveToStorage(ideas);
+  if(titleInput && bodyInput){
+    titleInput.value = "";
+    bodyInput.value = "";
+  }
 }
-//if user input fields true, create instance of Idea class, .push into ideas[]
 
+//if user input fields true, create instance of Idea class, .push into ideas[]
+// when user attempts to click the save button w/o both fields filled out:
+//the respective box should fill with a message (in red text) that says "Please enter a title/body"
+//create a <p> maybe that has the text already styled, then when the function fires: classList.add/remove(hidden)
+// for the red text class
+
+// function disableSaveButton() {
+//   if(!titleInput || !bodyInput) {
+//     saveButton.disabled = true;
+// //disable save button, change the type?
+// //create a CSS rule that changes the color
+// //disable pointer;
+//   }
+// }
 
 function validateUserInput() {
   var userTitle = titleInput.value;
   var userBody = bodyInput.value;
-  if (!userTitle || !userBody) {
-    alert("💡 Please Enter a Title and Body to Save Your Idea 💡");
+
+  if (userTitle && userBody) {
+    saveButton.disabled = false;
+  } else {
+    saveButton.disabled = true;
     return;
   }
 }
+
 //make sure both input fields hold data before save button can be clicked:
 //if !userInput, then display alert to let user know to first input data into each box.
 

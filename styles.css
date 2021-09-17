@@ -208,3 +208,8 @@ p {
   display: block;
   margin: auto;
 }
+
+.hidden {
+display: none!important;
+
+}

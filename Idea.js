@@ -13,11 +13,11 @@ saveToStorage(ideas) {
   localStorage.setItem('ideas', stringifiedIdeas);
 }
 // deleteFromStorage
-deleteFromStorage(retrieveIdea) {
+deleteFromStorage() {
   var retrievedIdea = localStorage.getItem('idea');
   //this specific idea's identity will need to be handled in main.js, when invoked/found this param will be passed into this function
   localStorage.removeItem(retrievedIdea);
-  var parsedIdea = JSON.parse(retrievedIdea);
+  // var parsedIdea = JSON.parse(retrievedIdea);
 }
 // updateIdea (should update the idea’s starred state)
 
