@@ -15,14 +15,17 @@ bodyInput.addEventListener('keyup', validateUserInput);
 
 
 var ideas = [];
-displayCards();
+persistOnPageLoad();
 
 //Event Handlers
 function createIdeaCard(event) {
   event.preventDefault();
   var userTitle = titleInput.value;
   var userBody = bodyInput.value;
-  var savedIdea = new Idea(userTitle, userBody);
+  var id = Date.now();
+  var star = false;
+
+  var savedIdea = new Idea(userTitle, userBody, id, star);
   ideas.push(savedIdea);
   displayCards();
   savedIdea.saveToStorage(ideas);
@@ -103,4 +106,21 @@ function handleIdeaCardGridClick(event) {
   }
 
   displayCards();
+}
+
+function persistOnPageLoad() {
+  var ideasFromStorage = localStorage.getItem('stringifiedIdeas');
+  if (ideasFromStorage !== null) {
+    var parsedIdeasFromStorage = JSON.parse(ideasFromStorage);
+    for (var i = 0; i < parsedIdeasFromStorage.length; i++) {
+      var title = parsedIdeasFromStorage[i].title;
+      var body = parsedIdeasFromStorage[i].body;
+      var id = parsedIdeasFromStorage[i].id;
+      var star = parsedIdeasFromStorage[i].star;
+
+      var reinstantiatedIdea = new Idea(title, body, id, star);
+      ideas.push(reinstantiatedIdea);
+    }
+    displayCards();
+  }
 }
