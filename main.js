@@ -2,10 +2,12 @@ var titleInput = document.querySelector('.main-input-title');
 var bodyInput = document.querySelector('.main-input-body');
 var saveButton = document.querySelector('#save-button');
 var ideaCardGrid = document.querySelector('.idea-container');
+var deleteButton = document.querySelector('.delete-btn');
 
 
 
-//Event Listeners Go Here 👇
+
+//Event Listeners
 saveButton.addEventListener('click', createIdeaCard);
 ideaCardGrid.addEventListener('click', handleIdeaCardGridClick);
 titleInput.addEventListener('keyup', validateUserInput);
@@ -13,14 +15,14 @@ bodyInput.addEventListener('keyup', validateUserInput);
 
 
 var ideas = [];
+displayCards();
 
-//Event Handlers Go Here 👇
+//Event Handlers
 function createIdeaCard(event) {
   event.preventDefault();
-
   var userTitle = titleInput.value;
   var userBody = bodyInput.value;
-  var savedIdea = new Idea(titleInput.value, bodyInput.value);
+  var savedIdea = new Idea(userTitle, userBody);
   ideas.push(savedIdea);
   displayCards();
   savedIdea.saveToStorage(ideas);
@@ -30,26 +32,10 @@ function createIdeaCard(event) {
     saveButton.disabled = true;
   }
 }
-//make another change;
-//if user input fields true, create instance of Idea class, .push into ideas[]
-// when user attempts to click the save button w/o both fields filled out:
-//the respective box should fill with a message (in red text) that says "Please enter a title/body"
-//create a <p> maybe that has the text already styled, then when the function fires: classList.add/remove(hidden)
-// for the red text class
-
-// function disableSaveButton() {
-//   if(!titleInput || !bodyInput) {
-//     saveButton.disabled = true;
-// //disable save button, change the type?
-// //create a CSS rule that changes the color
-// //disable pointer;
-//   }
-// }
 
 function validateUserInput() {
   var userTitle = titleInput.value;
   var userBody = bodyInput.value;
-
   if (userTitle && userBody) {
     saveButton.disabled = false;
   } else {
@@ -58,18 +44,20 @@ function validateUserInput() {
   }
 }
 
-//make sure both input fields hold data before save button can be clicked:
-//if !userInput, then display alert to let user know to first input data into each box.
-
-
 function displayCards() {
   ideaCardGrid.innerHTML = "";
   for (var i = 0; i < ideas.length; i++) {
+    var starSource;
+    if (ideas[i].star) {
+      starSource = "./assets/star-active.svg";
+    } else {
+      starSource = "./assets/star.svg";
+    }
     ideaCardGrid.innerHTML +=
     `<div class="box-container" id="${ideas[i].id}">
       <div class="box-header-container">
-        <button class="star-btn"><img src="./assets/star.svg"></button>
-        <button class="delete-btn"><img src="./assets/delete.svg"></button>
+        <input class="star-btn" type="image" name="star button" src="${starSource}" alt="picture-of-a-star">
+        <input class="delete-btn" type="image" name="delete button" src="./assets/delete.svg" alt="picture-of-an-x">
       </div>
       <div class="title-body-container">
         <label class="idea-title">${ideas[i].title}</label>
@@ -85,24 +73,34 @@ function displayCards() {
   }
 }
 
-function deleteIdea() {
-  //get the id of the target that the user clicked on (using a for loop).
-  //splice the element from the array
-  //savedIdea.deleteFromStorage();
+function deleteIdeaCard(ideaId) {
+  for (var i = 0; i < ideas.length; i ++) {
+    if (ideaId === ideas[i].id) {
+      var ideaToDelete = ideas[i];
+      ideaToDelete.deleteFromStorage();
+      ideas.splice(i, 1);
+    }
+  }
+}
+
+function favoriteIdeaCard(ideaId) {
+  for (var i = 0; i < ideas.length; i++) {
+    if (ideaId === ideas[i].id) {
+      ideas[i].star = !ideas[i].star;
+      ideas[i].updateIdea();
+    }
+  }
 }
 
 function handleIdeaCardGridClick(event) {
-  console.dir(event.target);
-  //delegates events based on what was clicked
-  //get the id of the card that was clicked on
+  var ideaId = Number(event.target.closest('.box-container').id);
+  if (event.target.classList.contains('delete-btn')) {
+    deleteIdeaCard(ideaId);
+  }
+
+  if (event.target.classList.contains('star-btn')) {
+    favoriteIdeaCard(ideaId);
+  }
+
+  displayCards();
 }
-
-
-
-
-
-
-
-
-
-//var starredIdeas = [display when user clicks on "Show Starred Ideas"];
