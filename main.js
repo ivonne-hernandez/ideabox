@@ -2,6 +2,8 @@ var titleInput = document.querySelector('.main-input-title');
 var bodyInput = document.querySelector('.main-input-body');
 var saveButton = document.querySelector('#save-button');
 var ideaCardGrid = document.querySelector('.idea-container');
+var deleteButton = document.querySelector('.delete-btn');
+
 
 
 
@@ -12,7 +14,10 @@ titleInput.addEventListener('keyup', validateUserInput);
 bodyInput.addEventListener('keyup', validateUserInput);
 
 
-var ideas = [];
+var testIdea = new Idea("test title", "test body");
+var testIdea2 = new Idea("test title 2", "test body 2");
+var ideas = [testIdea, testIdea2];
+displayCards();
 
 //Event Handlers Go Here 👇
 function createIdeaCard(event) {
@@ -30,21 +35,7 @@ function createIdeaCard(event) {
     saveButton.disabled = true;
   }
 }
-//make another change;
-//if user input fields true, create instance of Idea class, .push into ideas[]
-// when user attempts to click the save button w/o both fields filled out:
-//the respective box should fill with a message (in red text) that says "Please enter a title/body"
-//create a <p> maybe that has the text already styled, then when the function fires: classList.add/remove(hidden)
-// for the red text class
 
-// function disableSaveButton() {
-//   if(!titleInput || !bodyInput) {
-//     saveButton.disabled = true;
-// //disable save button, change the type?
-// //create a CSS rule that changes the color
-// //disable pointer;
-//   }
-// }
 
 function validateUserInput() {
   var userTitle = titleInput.value;
@@ -58,9 +49,6 @@ function validateUserInput() {
   }
 }
 
-//make sure both input fields hold data before save button can be clicked:
-//if !userInput, then display alert to let user know to first input data into each box.
-
 
 function displayCards() {
   ideaCardGrid.innerHTML = "";
@@ -68,8 +56,8 @@ function displayCards() {
     ideaCardGrid.innerHTML +=
     `<div class="box-container" id="${ideas[i].id}">
       <div class="box-header-container">
-        <button class="star-btn"><img src="./assets/star.svg"></button>
-        <button class="delete-btn"><img src="./assets/delete.svg"></button>
+      <input class="star-btn" type="image" name="star button" src="./assets/star.svg" alt="picture-of-a-star">
+      <input class="delete-btn" type="image" name="delete button" src="./assets/delete.svg" alt="picture-of-an-x">
       </div>
       <div class="title-body-container">
         <label class="idea-title">${ideas[i].title}</label>
@@ -85,14 +73,38 @@ function displayCards() {
   }
 }
 
-function deleteIdea() {
-  //get the id of the target that the user clicked on (using a for loop).
-  //splice the element from the array
-  //savedIdea.deleteFromStorage();
+function deleteIdeaCard(ideaId) {
+  for (var i = 0; i < ideas.length; i ++) {
+    if (ideaId === ideas[i].id) {
+      ideas.splice(i, 1);
+      displayCards();
+    }
+  }
+  // if (event.target.classList.contains('delete-btn')){
+  //     event.target.parentNode.parentNode.classList.add('hidden')
+  //   };
 }
+  // console.log(event.target);
+  // if (event.target.classList.contains('delete-btn')){
+  //     event.target.parentNode.parentNode.classList.add('hidden')
+  //   };
+    //when user clicks the delete button, card needs to disappear from page and be removed from local storage with localStorage.removeItem()
+    //add the hidden class to the card after click
+    //PERMANENTLY removed from ideas array .splice
+    //for loop imminent
+    //event.target.id
 
 function handleIdeaCardGridClick(event) {
-  console.dir(event.target);
+
+  //if(delete button is clicked) > do this
+  if (event.target.classList.contains('delete-btn')) {
+    var ideaId = Number(event.target.closest('.box-container').id);
+    deleteIdeaCard(ideaId);
+  }
+  //if event.target is the delete-btn then delete the idea card using the event.target(id);
+  //if(star button is clicked) > do this
+  //if(comment button is clicked) > do this
+
   //delegates events based on what was clicked
   //get the id of the card that was clicked on
 }
