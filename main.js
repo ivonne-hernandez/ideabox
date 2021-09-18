@@ -7,7 +7,7 @@ var deleteButton = document.querySelector('.delete-btn');
 
 
 
-//Event Listeners Go Here 👇
+//Event Listeners
 saveButton.addEventListener('click', createIdeaCard);
 ideaCardGrid.addEventListener('click', handleIdeaCardGridClick);
 titleInput.addEventListener('keyup', validateUserInput);
@@ -17,13 +17,12 @@ bodyInput.addEventListener('keyup', validateUserInput);
 var ideas = [];
 displayCards();
 
-//Event Handlers Go Here 👇
+//Event Handlers
 function createIdeaCard(event) {
   event.preventDefault();
-
   var userTitle = titleInput.value;
   var userBody = bodyInput.value;
-  var savedIdea = new Idea(titleInput.value, bodyInput.value);
+  var savedIdea = new Idea(userTitle, userBody);
   ideas.push(savedIdea);
   displayCards();
   savedIdea.saveToStorage(ideas);
@@ -34,11 +33,9 @@ function createIdeaCard(event) {
   }
 }
 
-
 function validateUserInput() {
   var userTitle = titleInput.value;
   var userBody = bodyInput.value;
-
   if (userTitle && userBody) {
     saveButton.disabled = false;
   } else {
@@ -47,15 +44,20 @@ function validateUserInput() {
   }
 }
 
-
 function displayCards() {
   ideaCardGrid.innerHTML = "";
   for (var i = 0; i < ideas.length; i++) {
+    var starSource;
+    if (ideas[i].star) {
+      starSource = "./assets/star-active.svg";
+    } else {
+      starSource = "./assets/star.svg";
+    }
     ideaCardGrid.innerHTML +=
     `<div class="box-container" id="${ideas[i].id}">
       <div class="box-header-container">
-      <input class="star-btn" type="image" name="star button" src="./assets/star.svg" alt="picture-of-a-star">
-      <input class="delete-btn" type="image" name="delete button" src="./assets/delete.svg" alt="picture-of-an-x">
+        <input class="star-btn" type="image" name="star button" src="${starSource}" alt="picture-of-a-star">
+        <input class="delete-btn" type="image" name="delete button" src="./assets/delete.svg" alt="picture-of-an-x">
       </div>
       <div class="title-body-container">
         <label class="idea-title">${ideas[i].title}</label>
@@ -77,28 +79,28 @@ function deleteIdeaCard(ideaId) {
       var ideaToDelete = ideas[i];
       ideaToDelete.deleteFromStorage();
       ideas.splice(i, 1);
-      displayCards();
     }
   }
 }
 
-function favoriteIdeaCard() {
-
-}
-
-function handleIdeaCardGridClick(event) {
-  if (event.target.classList.contains('delete-btn')) {
-    var ideaId = Number(event.target.closest('.box-container').id);
-    deleteIdeaCard(ideaId);
+function favoriteIdeaCard(ideaId) {
+  for (var i = 0; i < ideas.length; i++) {
+    if (ideaId === ideas[i].id) {
+      ideas[i].star = !ideas[i].star;
+      ideas[i].updateIdea();
+    }
   }
 }
 
+function handleIdeaCardGridClick(event) {
+  var ideaId = Number(event.target.closest('.box-container').id);
+  if (event.target.classList.contains('delete-btn')) {
+    deleteIdeaCard(ideaId);
+  }
 
+  if (event.target.classList.contains('star-btn')) {
+    favoriteIdeaCard(ideaId);
+  }
 
-
-
-
-
-
-
-//var starredIdeas = [display when user clicks on "Show Starred Ideas"];
+  displayCards();
+}

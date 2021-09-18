@@ -1,5 +1,3 @@
-// var ideas = [];
-
 class Idea {
   constructor(title, body) {
     this.id = Date.now();
@@ -8,26 +6,30 @@ class Idea {
     this.star = false;
   }
 
-saveToStorage(ideas) {
-  var stringifiedIdeas = JSON.stringify(ideas);
-  localStorage.setItem('stringifiedIdeas', stringifiedIdeas);
-}
-// deleteFromStorage
-deleteFromStorage() {
-  var retrievedIdeas = localStorage.getItem('stringifiedIdeas');
-  var parsedIdeas = JSON.parse(retrievedIdeas);
-  for (var i = 0; i < parsedIdeas.length; i ++) {
-    if (this.id === parsedIdeas[i].id) {
-      parsedIdeas.splice(i, 1);
-    }
+  saveToStorage(ideas) {
+    var stringifiedIdeas = JSON.stringify(ideas);
+    localStorage.setItem('stringifiedIdeas', stringifiedIdeas);
   }
-  this.saveToStorage(parsedIdeas);
-  //this specific idea's identity will need to be handled in main.js, when invoked/found this param will be passed into this function
-  // localStorage.removeItem(retrievedIdeas);
-  // var parsedIdea = JSON.parse(retrievedIdea);
-}
-// updateIdea (should update the idea’s starred state)
 
+  deleteFromStorage() {
+    var retrievedIdeas = localStorage.getItem('stringifiedIdeas');
+    var parsedIdeas = JSON.parse(retrievedIdeas);
+    for (var i = 0; i < parsedIdeas.length; i ++) {
+      if (this.id === parsedIdeas[i].id) {
+        parsedIdeas.splice(i, 1);
+      }
+    }
+    this.saveToStorage(parsedIdeas);
+  }
 
+  updateIdea() {
+    var retrievedIdeas = localStorage.getItem('stringifiedIdeas');
+    var parsedIdeas = JSON.parse(retrievedIdeas);
+    for (var i = 0; i < parsedIdeas.length; i ++) {
+      if (this.id === parsedIdeas[i].id) {
+        parsedIdeas[i].star = !parsedIdeas[i].star;
+      }
+    }
+    this.saveToStorage(parsedIdeas);
+  }
 }
-//no DOM manipulation in classes
