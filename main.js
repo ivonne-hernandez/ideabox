@@ -14,9 +14,7 @@ titleInput.addEventListener('keyup', validateUserInput);
 bodyInput.addEventListener('keyup', validateUserInput);
 
 
-var testIdea = new Idea("test title", "test body");
-var testIdea2 = new Idea("test title 2", "test body 2");
-var ideas = [testIdea, testIdea2];
+var ideas = [];
 displayCards();
 
 //Event Handlers Go Here 👇
@@ -76,37 +74,23 @@ function displayCards() {
 function deleteIdeaCard(ideaId) {
   for (var i = 0; i < ideas.length; i ++) {
     if (ideaId === ideas[i].id) {
+      var ideaToDelete = ideas[i];
+      ideaToDelete.deleteFromStorage();
       ideas.splice(i, 1);
       displayCards();
     }
   }
-  // if (event.target.classList.contains('delete-btn')){
-  //     event.target.parentNode.parentNode.classList.add('hidden')
-  //   };
 }
-  // console.log(event.target);
-  // if (event.target.classList.contains('delete-btn')){
-  //     event.target.parentNode.parentNode.classList.add('hidden')
-  //   };
-    //when user clicks the delete button, card needs to disappear from page and be removed from local storage with localStorage.removeItem()
-    //add the hidden class to the card after click
-    //PERMANENTLY removed from ideas array .splice
-    //for loop imminent
-    //event.target.id
+
+function favoriteIdeaCard() {
+
+}
 
 function handleIdeaCardGridClick(event) {
-
-  //if(delete button is clicked) > do this
   if (event.target.classList.contains('delete-btn')) {
     var ideaId = Number(event.target.closest('.box-container').id);
     deleteIdeaCard(ideaId);
   }
-  //if event.target is the delete-btn then delete the idea card using the event.target(id);
-  //if(star button is clicked) > do this
-  //if(comment button is clicked) > do this
-
-  //delegates events based on what was clicked
-  //get the id of the card that was clicked on
 }
 
 
