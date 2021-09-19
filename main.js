@@ -49,16 +49,14 @@ function validateUserInput() {
 
 function displayCards() {
   ideaCardGrid.innerHTML = "";
-  if (showStarredIdeasButton.innerText === `Show Starred Ideas`) {
-    for (var i = 0; i < ideas.length; i++) {
+  var shouldShowAllIdeas = showStarredIdeasButton.innerText === `Show Starred Ideas`;
+  var shouldShowStarredIdeas = showStarredIdeasButton.innerText === `Show All Ideas`;
+  for (var i = 0; i < ideas.length; i++) {
+    if (shouldShowAllIdeas) {
+      ideaCardGrid.innerHTML += generateInnerHTML(ideas[i]);
+    } else if (shouldShowStarredIdeas && ideas[i].star) {
       ideaCardGrid.innerHTML += generateInnerHTML(ideas[i]);
     }
-  } else {
-    for (var i = 0; i < ideas.length; i++) {
-      if (ideas[i].star) {
-        ideaCardGrid.innerHTML += generateInnerHTML(ideas[i]);
-      }
-    } 
   }
 }
 
