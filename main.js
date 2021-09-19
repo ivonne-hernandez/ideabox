@@ -4,7 +4,7 @@ var saveButton = document.querySelector('#save-button');
 var ideaCardGrid = document.querySelector('.idea-container');
 var deleteButton = document.querySelector('.delete-btn');
 var searchBox = document.querySelector('#search-box');
-
+var showStarredIdeasButton = document.querySelector('#show-starred-ideas-button');
 
 //Event Listeners
 saveButton.addEventListener('click', createIdeaCard);
@@ -12,7 +12,7 @@ ideaCardGrid.addEventListener('click', handleIdeaCardGridClick);
 titleInput.addEventListener('keyup', validateUserInput);
 bodyInput.addEventListener('keyup', validateUserInput);
 searchBox.addEventListener('keyup', activeSearchFilter);
-
+showStarredIdeasButton.addEventListener('click', showStarredIdeas);//
 
 var ideas = [];
 persistOnPageLoad();
@@ -49,31 +49,42 @@ function validateUserInput() {
 
 function displayCards() {
   ideaCardGrid.innerHTML = "";
-  for (var i = 0; i < ideas.length; i++) {
-    var starSource;
-    if (ideas[i].star) {
-      starSource = "./assets/star-active.svg";
-    } else {
-      starSource = "./assets/star.svg";
+  if (showStarredIdeasButton.innerText === `Show Starred Ideas`) {
+    for (var i = 0; i < ideas.length; i++) {
+      ideaCardGrid.innerHTML += generateInnerHTML(ideas[i]);
     }
-    ideaCardGrid.innerHTML +=
-    `<div class="box-container" id="${ideas[i].id}">
-      <div class="box-header-container">
-        <input class="star-btn" type="image" name="star button" src="${starSource}" alt="picture-of-a-star">
-        <input class="delete-btn" type="image" name="delete button" src="./assets/delete.svg" alt="picture-of-an-x">
-      </div>
-      <div class="title-body-container">
-        <label class="idea-title">${ideas[i].title}</label>
-        <div class="idea-body-container">
-          <p class="idea-body">${ideas[i].body}</p>
-        </div>
-      </div>
-      <div class="box-footer-container">
-        <button class="comment-btn"><img src="./assets/comment.svg"></button>
-        <label class="comment-label">Comment</label>
-      </div>
-    </div>`;
+  } else {
+    for (var i = 0; i < ideas.length; i++) {
+      if (ideas[i].star) {
+        ideaCardGrid.innerHTML += generateInnerHTML(ideas[i]);
+      }
+    } 
   }
+}
+
+function generateInnerHTML(idea) {
+  var starSource;
+  if (idea.star) {
+    starSource = "./assets/star-active.svg";
+  } else {
+    starSource = "./assets/star.svg";
+  }
+  return `<div class="box-container" id="${idea.id}">
+    <div class="box-header-container">
+      <input class="star-btn" type="image" name="star button" src="${starSource}" alt="picture-of-a-star">
+      <input class="delete-btn" type="image" name="delete button" src="./assets/delete.svg" alt="picture-of-an-x">
+    </div>
+    <div class="title-body-container">
+      <label class="idea-title">${idea.title}</label>
+      <div class="idea-body-container">
+        <p class="idea-body">${idea.body}</p>
+      </div>
+    </div>
+    <div class="box-footer-container">
+      <button class="comment-btn"><img src="./assets/comment.svg"></button>
+      <label class="comment-label">Comment</label>
+    </div>
+  </div>`;
 }
 
 function deleteIdeaCard(ideaId) {
@@ -125,7 +136,6 @@ function persistOnPageLoad() {
   }
 }
 
-
 function activeSearchFilter() {
   var titleArray = document.querySelectorAll('.idea-title');
   var bodyArray = document.querySelectorAll('.idea-body');
@@ -140,4 +150,13 @@ function activeSearchFilter() {
           titleArray[i].parentNode.parentNode.classList.add('hidden');
         }
   }
+}
+
+function showStarredIdeas() {
+  if (showStarredIdeasButton.innerText === `Show Starred Ideas`) {
+    showStarredIdeasButton.innerText = `Show All Ideas`;
+  } else {
+    showStarredIdeasButton.innerText = `Show Starred Ideas`;
+  }
+  displayCards();
 }
