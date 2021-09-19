@@ -3,8 +3,7 @@ var bodyInput = document.querySelector('.main-input-body');
 var saveButton = document.querySelector('#save-button');
 var ideaCardGrid = document.querySelector('.idea-container');
 var deleteButton = document.querySelector('.delete-btn');
-
-
+var searchBox = document.querySelector('#search-box');
 
 
 //Event Listeners
@@ -12,17 +11,21 @@ saveButton.addEventListener('click', createIdeaCard);
 ideaCardGrid.addEventListener('click', handleIdeaCardGridClick);
 titleInput.addEventListener('keyup', validateUserInput);
 bodyInput.addEventListener('keyup', validateUserInput);
+searchBox.addEventListener('keyup', activeSearchFilter);
 
 
 var ideas = [];
-displayCards();
+persistOnPageLoad();
 
 //Event Handlers
 function createIdeaCard(event) {
   event.preventDefault();
   var userTitle = titleInput.value;
   var userBody = bodyInput.value;
-  var savedIdea = new Idea(userTitle, userBody);
+  var id = Date.now();
+  var star = false;
+
+  var savedIdea = new Idea(userTitle, userBody, id, star);
   ideas.push(savedIdea);
   displayCards();
   savedIdea.saveToStorage(ideas);
@@ -62,7 +65,7 @@ function displayCards() {
       <div class="title-body-container">
         <label class="idea-title">${ideas[i].title}</label>
         <div class="idea-body-container">
-          <p class"idea-body">${ideas[i].body}</p>
+          <p class="idea-body">${ideas[i].body}</p>
         </div>
       </div>
       <div class="box-footer-container">
@@ -103,4 +106,38 @@ function handleIdeaCardGridClick(event) {
   }
 
   displayCards();
+}
+
+function persistOnPageLoad() {
+  var ideasFromStorage = localStorage.getItem('stringifiedIdeas');
+  if (ideasFromStorage !== null) {
+    var parsedIdeasFromStorage = JSON.parse(ideasFromStorage);
+    for (var i = 0; i < parsedIdeasFromStorage.length; i++) {
+      var title = parsedIdeasFromStorage[i].title;
+      var body = parsedIdeasFromStorage[i].body;
+      var id = parsedIdeasFromStorage[i].id;
+      var star = parsedIdeasFromStorage[i].star;
+
+      var reinstantiatedIdea = new Idea(title, body, id, star);
+      ideas.push(reinstantiatedIdea);
+    }
+    displayCards();
+  }
+}
+
+
+function activeSearchFilter() {
+  var titleArray = document.querySelectorAll('.idea-title');
+  var bodyArray = document.querySelectorAll('.idea-body');
+  var titleCharacters;
+  var bodyCharacters;
+  for(i = 0; i < titleArray.length; i++) {
+    titleCharacters = titleArray[i].innerText.toLowerCase();
+    bodyCharacters = bodyArray[i].innerText.toLowerCase();
+      if(titleCharacters.includes(event.target.value.toLowerCase()) || bodyCharacters.includes(event.target.value.toLowerCase())) {
+        titleArray[i].parentNode.parentNode.classList.remove('hidden');
+      } else {
+          titleArray[i].parentNode.parentNode.classList.add('hidden');
+        }
+  }
 }
