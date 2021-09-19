@@ -81,8 +81,8 @@ function generateInnerHTML(idea) {
         <p class="idea-body">${idea.body}</p>
       </div>
     </div>
-    <div class="box-footer-container">
-      <button class="comment-btn"><img src="./assets/comment.svg"></button>
+    <div class="box-footer-container"
+      <input class="comment-btn" type="image" name="comment button" src="./assets/comment.svg" alt="picture-of-a-plus">
       <label class="comment-label">Comment</label>
     </div>
   </div>`;
