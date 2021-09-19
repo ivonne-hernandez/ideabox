@@ -58,6 +58,9 @@ function displayCards() {
       ideaCardGrid.innerHTML += generateInnerHTML(ideas[i]);
     }
   }
+  if (searchBox.value) {
+    activeSearchFilter();
+  }
 }
 
 function generateInnerHTML(idea) {
@@ -139,14 +142,14 @@ function activeSearchFilter() {
   var bodyArray = document.querySelectorAll('.idea-body');
   var titleCharacters;
   var bodyCharacters;
-  for(i = 0; i < titleArray.length; i++) {
+  for (i = 0; i < titleArray.length; i++) {
     titleCharacters = titleArray[i].innerText.toLowerCase();
     bodyCharacters = bodyArray[i].innerText.toLowerCase();
-      if(titleCharacters.includes(event.target.value.toLowerCase()) || bodyCharacters.includes(event.target.value.toLowerCase())) {
-        titleArray[i].parentNode.parentNode.classList.remove('hidden');
-      } else {
-          titleArray[i].parentNode.parentNode.classList.add('hidden');
-        }
+    if (titleCharacters.includes(searchBox.value.toLowerCase()) || bodyCharacters.includes(searchBox.value.toLowerCase())) {
+      titleArray[i].parentNode.parentNode.classList.remove('hidden');
+    } else {
+      titleArray[i].parentNode.parentNode.classList.add('hidden');
+    }
   }
 }
 
