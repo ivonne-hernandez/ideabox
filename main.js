@@ -7,6 +7,7 @@ var searchBox = document.querySelector('#search-box');
 var showStarredIdeasButton = document.querySelector('#show-starred-ideas-button');
 
 //Event Listeners
+window.addEventListener('load', persistOnPageLoad);
 saveButton.addEventListener('click', createIdeaCard);
 ideaCardGrid.addEventListener('click', handleIdeaCardGridClick);
 titleInput.addEventListener('keyup', validateUserInput);
@@ -15,7 +16,7 @@ searchBox.addEventListener('keyup', activeSearchFilter);
 showStarredIdeasButton.addEventListener('click', showStarredIdeas);//
 
 var ideas = [];
-persistOnPageLoad();
+
 
 //Event Handlers
 function createIdeaCard(event) {
