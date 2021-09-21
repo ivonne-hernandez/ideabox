@@ -79,7 +79,7 @@ function generateInnerHTML(idea) {
     <div class="title-body-container">
       <label class="idea-title" id="idea-title">${idea.title}</label>
       <div class="idea-body-container">
-        <p class="idea-body" id="idea-container">${idea.body}</p>
+        <p class="idea-body" id="idea-body">${idea.body}</p>
       </div>
     </div>
     <div class="box-footer-container">
