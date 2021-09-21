@@ -11,28 +11,41 @@
       <header class="idea-box-header">IdeaBox</header>
       <div class="filter-starred-ideas-container">
         <label class="starred-ideas-label"> Filter Starred Ideas</label>
-        <button class="starred-ideas-button" id="show-starred-ideas-button">Show Starred Ideas</button>
+        <button class="starred-ideas-button button" id="show-starred-ideas-button">Show Starred Ideas</button>
       </div>
     </aside>
     <main class="form-container">
       <form class="main-page-form">
-        <label for="user-title" class="title-label form-element">Title</label>
+        <label for="main-input-title" class="title-label form-element">Title</label>
         <input type="text" class="main-input-title form-element" id="main-input-title"/>
-        <label for="user-bodciy" class="body-label form-element">Body</label>
+        <label for="main-input-body" class="body-label form-element">Body</label>
         <textarea class="main-input-body form-element" id="main-input-body"></textarea>
-        <button class="main-input-save form-element" id="save-button" disabled>
+        <button class="main-input-save form-element button" id="save-button" disabled>
           Save
         </button>
         <div class="form-element">
           <span class="search-container">
-            <input class="search-icon" type="image" src="./assets/search.svg" alt="search-icon"/>
+            <img class="search-icon" src="./assets/search.svg" alt="search-icon"/>
             <input type="text" class="search-box" id="search-box" placeholder="Search ideas"/>
           </span>
         </div>
       </form>
+      <form class="comment-form hidden">
+        <label for="user-comment" class="form-element">Comment</label>
+        <textarea class="comment-input form-element" id="user-comment"></textarea>
+        <button class="save-comment form-element button" id="save-comment-button" disabled>
+          Add a comment
+        </button>
+        <button class="cancel form-element button" id="cancel-button">
+          Cancel
+        </button>
+        <ul class="list-of-comments form-element">
+        </ul>
+      </form>
       <section class="idea-container" id="idea-container">
       </section>
     </main>
+    <script type="text/javascript" src="Comment.js"></script>
     <script type="text/javascript" src="Idea.js"></script>
     <script type="text/javascript" src="main.js"></script>
   </body>
