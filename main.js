@@ -1,12 +1,13 @@
-var titleInput = document.querySelector('.main-input-title');
-var bodyInput = document.querySelector('.main-input-body');
+var titleInput = document.querySelector('#main-input-title');
+var bodyInput = document.querySelector('#main-input-body');
 var saveButton = document.querySelector('#save-button');
-var ideaCardGrid = document.querySelector('.idea-container');
-var deleteButton = document.querySelector('.delete-btn');
+var ideaCardGrid = document.querySelector('#idea-container');
+var deleteButton = document.querySelector('#delete-btn');
 var searchBox = document.querySelector('#search-box');
 var showStarredIdeasButton = document.querySelector('#show-starred-ideas-button');
 
 //Event Listeners
+window.addEventListener('load', persistOnPageLoad);
 saveButton.addEventListener('click', createIdeaCard);
 ideaCardGrid.addEventListener('click', handleIdeaCardGridClick);
 titleInput.addEventListener('keyup', validateUserInput);
@@ -15,7 +16,7 @@ searchBox.addEventListener('keyup', activeSearchFilter);
 showStarredIdeasButton.addEventListener('click', showStarredIdeas);//
 
 var ideas = [];
-persistOnPageLoad();
+
 
 //Event Handlers
 function createIdeaCard(event) {
@@ -73,12 +74,12 @@ function generateInnerHTML(idea) {
   return `<div class="box-container" id="${idea.id}">
     <div class="box-header-container">
       <input class="star-btn" type="image" name="star button" src="${starSource}" alt="picture-of-a-star">
-      <input class="delete-btn" type="image" name="delete button" src="./assets/delete.svg" alt="picture-of-an-x">
+      <input class="delete-btn" id="delete-btn" type="image" name="delete button" src="./assets/delete.svg" alt="picture-of-an-x">
     </div>
     <div class="title-body-container">
-      <label class="idea-title">${idea.title}</label>
+      <label class="idea-title" id="idea-title">${idea.title}</label>
       <div class="idea-body-container">
-        <p class="idea-body">${idea.body}</p>
+        <p class="idea-body" id="idea-body">${idea.body}</p>
       </div>
     </div>
     <div class="box-footer-container">
@@ -138,8 +139,8 @@ function persistOnPageLoad() {
 }
 
 function activeSearchFilter() {
-  var titleArray = document.querySelectorAll('.idea-title');
-  var bodyArray = document.querySelectorAll('.idea-body');
+  var titleArray = document.querySelectorAll('#idea-title');
+  var bodyArray = document.querySelectorAll('#idea-body');
   var titleCharacters;
   var bodyCharacters;
   for (i = 0; i < titleArray.length; i++) {
