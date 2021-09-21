@@ -9,8 +9,9 @@ var ideaForm = document.querySelector('.main-page-form');
 var commentForm = document.querySelector('.comment-form');
 var commentInput = document.querySelector('.comment-input');
 var addACommentButton = document.querySelector('#save-comment-button');
+var cancelButton = document.querySelector('#cancel-button');
+var listOfComments = document.querySelector('.list-of-comments');
 
-//Event Listeners
 saveButton.addEventListener('click', createIdeaCard);
 ideaCardGrid.addEventListener('click', handleIdeaCardGridClick);
 titleInput.addEventListener('keyup', validateUserInput);
@@ -19,13 +20,13 @@ searchBox.addEventListener('keyup', activeSearchFilter);
 showStarredIdeasButton.addEventListener('click', showStarredIdeas);
 commentInput.addEventListener('keyup', validateUserComment);
 addACommentButton.addEventListener('click', createIdeaComment);
+cancelButton.addEventListener('click', returnToMainPageForm);
 
 var ideas = [];
 var allComments = [];
 var ideaIdWithComment;
 persistOnPageLoad();
 
-//Event Handlers
 function createIdeaCard(event) {
   event.preventDefault();
   var userTitle = titleInput.value;
@@ -92,9 +93,6 @@ function generateInnerHTML(idea) {
             <div class="box-footer-container">
               <input class="comment-btn" type="image" name="comment button" src="./assets/comment.svg" alt="picture-of-a-plus-sign">
               <label class="comment-label">Comment</label>
-                <article class="comment">
-                  <p class="idea-comment">${idea.comments}</p>
-                </article>
             </div>
           </article>`;
 }
@@ -132,8 +130,8 @@ function handleIdeaCardGridClick(event) {
   }
 
   if (event.target.classList.contains('comment-btn')) {
-    showCommentForm();
     ideaIdWithComment = ideaId;
+    showCommentForm();
   }
 
   displayCards();
@@ -215,11 +213,13 @@ function createIdeaComment(event) {
   savedComment.saveToStorage(allComments);
   commentInput.value = "";
   addACommentButton.disabled = true;
+  displayComments();
 }
  
 function showCommentForm() {
   ideaForm.classList.add('hidden');
   commentForm.classList.remove('hidden');
+  displayComments();
 }
 
 function validateUserComment() {
@@ -227,5 +227,20 @@ function validateUserComment() {
     addACommentButton.disabled = false;
   } else {
     addACommentButton.disabled = true;
+  }
+}
+
+function returnToMainPageForm(event) {
+  event.preventDefault();
+  ideaForm.classList.remove('hidden');
+  commentForm.classList.add('hidden');
+}
+
+function displayComments() {
+  listOfComments.innerHTML = "";
+  for (var i = 0; i < allComments.length; i++) {
+    if (allComments[i].ideaId === ideaIdWithComment) {
+      listOfComments.innerHTML += `<li>${allComments[i].content}</li>`; 
+    }
   }
 }

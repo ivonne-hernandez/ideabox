@@ -20,7 +20,3 @@ class Comment {
     this.saveToStorage(parsedComments);
   }
 }
-
-
-// When I click the “Add” icon on an idea card,
-// A form to add a comment appears

@@ -99,7 +99,8 @@ label {
 }
 
 .main-input-save,
-.save-comment {
+.save-comment, 
+.cancel {
   /* fix font thickness */
   font-family: 'Open Sans', Bold;
   font-weight: bold;
@@ -221,4 +222,11 @@ p {
 
 .hidden {
   display: none;
+}
+
+.list-of-comments {
+  overflow-y: scroll;
+  height: 80px;
+  background-color: #ffffff;
+  margin-top: 10px;
 }
