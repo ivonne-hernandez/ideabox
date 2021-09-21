@@ -1,8 +1,8 @@
-var titleInput = document.querySelector('.main-input-title');
-var bodyInput = document.querySelector('.main-input-body');
+var titleInput = document.querySelector('#main-input-title');
+var bodyInput = document.querySelector('#main-input-body');
 var saveButton = document.querySelector('#save-button');
-var ideaCardGrid = document.querySelector('.idea-container');
-var deleteButton = document.querySelector('.delete-btn');
+var ideaCardGrid = document.querySelector('#idea-container');
+var deleteButton = document.querySelector('#delete-btn');
 var searchBox = document.querySelector('#search-box');
 var showStarredIdeasButton = document.querySelector('#show-starred-ideas-button');
 var ideaForm = document.querySelector('.main-page-form');
@@ -12,6 +12,8 @@ var addACommentButton = document.querySelector('#save-comment-button');
 var cancelButton = document.querySelector('#cancel-button');
 var listOfComments = document.querySelector('.list-of-comments');
 
+//Event Listeners
+window.addEventListener('load', persistOnPageLoad);
 saveButton.addEventListener('click', createIdeaCard);
 ideaCardGrid.addEventListener('click', handleIdeaCardGridClick);
 titleInput.addEventListener('keyup', validateUserInput);
@@ -25,7 +27,6 @@ cancelButton.addEventListener('click', returnToMainPageForm);
 var ideas = [];
 var allComments = [];
 var ideaIdWithComment;
-persistOnPageLoad();
 
 function createIdeaCard(event) {
   event.preventDefault();
@@ -80,21 +81,21 @@ function generateInnerHTML(idea) {
     starSource = "./assets/star.svg";
   }
   return `<article class="box-container" id="${idea.id}">
-            <div class="box-header-container">
-              <input class="star-btn" type="image" name="star button" src="${starSource}" alt="picture-of-a-star">
-              <input class="delete-btn" type="image" name="delete button" src="./assets/delete.svg" alt="picture-of-an-x">
-            </div>
-            <div class="title-body-container">
-              <label class="idea-title">${idea.title}</label>
-              <div class="idea-body-container">
-                <p class="idea-body">${idea.body}</p>
-              </div>
-            </div>
-            <div class="box-footer-container">
-              <input class="comment-btn" type="image" name="comment button" src="./assets/comment.svg" alt="picture-of-a-plus-sign">
-              <label class="comment-label">Comment</label>
-            </div>
-          </article>`;
+    <div class="box-header-container">
+      <input class="star-btn" type="image" name="star button" src="${starSource}" alt="picture-of-a-star">
+      <input class="delete-btn" id="delete-btn" type="image" name="delete button" src="./assets/delete.svg" alt="picture-of-an-x">
+    </div>
+    <div class="title-body-container">
+      <label class="idea-title" id="idea-title">${idea.title}</label>
+      <div class="idea-body-container">
+        <p class="idea-body" id="idea-body">${idea.body}</p>
+      </div>
+    </div>
+    <div class="box-footer-container">
+      <button class="comment-btn"><img src="./assets/comment.svg"></button>
+      <label class="comment-label">Comment</label>
+    </div>
+  </article>`;
 }
 
 function deleteIdeaCard(ideaId) {
@@ -169,8 +170,8 @@ function persistOnPageLoad() {
 }
 
 function activeSearchFilter() {
-  var titleArray = document.querySelectorAll('.idea-title');
-  var bodyArray = document.querySelectorAll('.idea-body');
+  var titleArray = document.querySelectorAll('#idea-title');
+  var bodyArray = document.querySelectorAll('#idea-body');
   var titleCharacters;
   var bodyCharacters;
   for (i = 0; i < titleArray.length; i++) {
