@@ -12,7 +12,6 @@ var addACommentButton = document.querySelector('#save-comment-button');
 var cancelButton = document.querySelector('#cancel-button');
 var listOfComments = document.querySelector('.list-of-comments');
 
-//Event Listeners
 window.addEventListener('load', persistOnPageLoad);
 saveButton.addEventListener('click', createIdeaCard);
 ideaCardGrid.addEventListener('click', handleIdeaCardGridClick);
@@ -92,7 +91,7 @@ function generateInnerHTML(idea) {
       </div>
     </div>
     <div class="box-footer-container">
-      <button class="comment-btn"><img src="./assets/comment.svg"></button>
+      <input type="image" class="comment-btn" src="./assets/comment.svg" alt="picture of a plus sign"/>
       <label class="comment-label">Comment</label>
     </div>
   </article>`;
