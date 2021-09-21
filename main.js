@@ -5,8 +5,10 @@ var ideaCardGrid = document.querySelector('.idea-container');
 var deleteButton = document.querySelector('.delete-btn');
 var searchBox = document.querySelector('#search-box');
 var showStarredIdeasButton = document.querySelector('#show-starred-ideas-button');
-var titleLabel = document.querySelector('.title-label');
-var bodyLabel = document.querySelector('.body-label');
+var ideaForm = document.querySelector('.main-page-form');
+var commentForm = document.querySelector('.comment-form');
+var commentInput = document.querySelector('.comment-input');
+var addACommentButton = document.querySelector('#save-comment-button');
 //Event Listeners
 saveButton.addEventListener('click', createIdeaCard);
 ideaCardGrid.addEventListener('click', handleIdeaCardGridClick);
@@ -14,9 +16,9 @@ titleInput.addEventListener('keyup', validateUserInput);
 bodyInput.addEventListener('keyup', validateUserInput);
 searchBox.addEventListener('keyup', activeSearchFilter);
 showStarredIdeasButton.addEventListener('click', showStarredIdeas);
+commentInput.addEventListener('keyup', validateUserComment);
 
 var ideas = [];
-var comments = [];//
 persistOnPageLoad();
 
 //Event Handlers
@@ -46,7 +48,6 @@ function validateUserInput() {
     saveButton.disabled = false;
   } else {
     saveButton.disabled = true;
-    return;
   }
 }
 
@@ -124,7 +125,7 @@ function handleIdeaCardGridClick(event) {
   }
 
   if (event.target.classList.contains('comment-btn')) {
-    displayComments(ideaId);
+    createIdeaComment(ideaId);
   }
 
   displayCards();
@@ -173,18 +174,35 @@ function showStarredIdeas() {
   displayCards();
 }
 
-function displayComments(ideaId) {
-  // for (var i = 0; i < ideas.length; i ++) {
-  //   if (ideaId === ideas[i].id) {
-  //     var comment = new Comment(
-  //   }
-  // }
-  
+function createIdeaComment(ideaId) {
   showCommentForm();
+
+  // var comments = [];
+
+  // var savedIdea = new Idea(userTitle, userBody, id, star, comments);
+  // ideas.push(savedIdea);
+  // displayCards();
+  // savedIdea.saveToStorage(ideas);
+  // if(titleInput && bodyInput){
+  //   titleInput.value = "";
+  //   bodyInput.value = "";
+  //   saveButton.disabled = true;
+  //once comment has been added, I want to go back to the main page
 }
 
 function showCommentForm() {
-  titleInput.classList.add('hidden');
-  titleLabel.classList.add('hidden');
-  bodyLabel.innerText = `Add a comment`;
+  ideaForm.classList.add('hidden');
+  commentForm.classList.remove('hidden');
 }
+
+function validateUserComment() {
+  if (commentInput.value) {
+    addACommentButton.disabled = false;
+  } else {
+    addACommentButton.disabled = true;
+  }
+}
+
+
+// When I open the comment form on a card, type something in, and click “Add Comment”,
+// The text typed in is now a comment attached to this card

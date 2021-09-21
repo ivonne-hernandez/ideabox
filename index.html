@@ -16,11 +16,11 @@
     </aside>
     <main class="form-container">
       <form class="main-page-form">
-        <label for="user-title" class="form-element">Title</label>
+        <label for="user-title" class="title-label form-element">Title</label>
         <input type="text" class="main-input-title form-element" id="user-title"/>
-        <label for="user-body" class="form-element">Body</label>
+        <label for="user-body" class="body-label form-element">Body</label>
         <textarea class="main-input-body form-element" id="user-body"></textarea>
-          <!-- change this class name later  -->
+        <!-- change this class name later  -->
         <button class="main-input-save form-element" id="save-button" disabled>
           Save
         </button>
@@ -31,9 +31,17 @@
           </span>
         </div>
       </form>
+      <form class="comment-form hidden">
+        <label for="user-comment" class="form-element">Comment</label>
+        <textarea class="comment-input form-element" id="user-comment"></textarea>
+        <button class="save-comment form-element" id="save-comment-button" disabled>
+          Add a comment
+        </button>
+      </form>
       <section class="idea-container">
       </section>
     </main>
+    <script type="text/javascript" src="Comment.js"></script>
     <script type="text/javascript" src="Idea.js"></script>
     <script type="text/javascript" src="main.js"></script>
   </body>

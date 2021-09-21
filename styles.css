@@ -62,7 +62,8 @@ label {
   padding: 15px;
 }
 
-.main-page-form {
+.main-page-form,
+.comment-form {
   font-family: 'Open Sans';
   font-weight: 100;
   color: #1F1F3D;
@@ -89,14 +90,16 @@ label {
   height: 25px;
 }
 
-.main-input-body {
+.main-input-body,
+.comment-input {
   border: 1px solid #353567;
   border-radius: 1px;
   height: 20%;
   resize: none;
 }
 
-.main-input-save {
+.main-input-save,
+.save-comment {
   /* fix font thickness */
   font-family: 'Open Sans', Bold;
   font-weight: bold;
@@ -108,7 +111,8 @@ label {
   margin-top: 0.75rem;
 }
 
-.main-input-save:disabled {
+.main-input-save:disabled,
+.save-comment:disabled {
   background-color: gray;
   cursor: not-allowed;
 }
