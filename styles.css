@@ -226,7 +226,7 @@ p {
 
 .list-of-comments {
   overflow-y: scroll;
-  height: 80px;
+  height: 130px;
   background-color: #ffffff;
   margin-top: 10px;
 }
