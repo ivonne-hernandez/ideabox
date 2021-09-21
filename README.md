@@ -3,7 +3,13 @@
   ##### A Front End Development Project by [Edward Krupicka](https://github.com/edwardkrupicka), [Ivonne Hernandez](https://github.com/ivonne-hernandez), and [Regan Losey](https://github.com/reganlosey).
   ##### Project Manager : [Jeremiah Black](https://github.com/jeremiahblackol)   
 
-  ### Features:
+#### Technologies Used:
+- HTML
+- CSS
+- Javascript
+
+### Features:
+
   #### On the IdeaBox site, the user can:
 
 
@@ -50,3 +56,5 @@
 #### [Github Repo](https://github.com/ivonne-hernandez/ideabox)
 
 #### [Deploy Link](https://ivonne-hernandez.github.io/ideabox/)
+
+#### [Project Spec Sheet](https://frontend.turing.edu/projects/module-1/ideabox-group.html)
