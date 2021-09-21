@@ -54,7 +54,7 @@ label {
   width: 100%;
 }
 
-.filter-starred-ideas {
+.filter-starred-ideas-container {
   font-family: "Open Sans";
   font-weight: lighter;
   padding: .5rem;
@@ -63,13 +63,37 @@ label {
   border-bottom: 1px solid #353567;
 }
 
-.starred-idea-button {
+.idea-box-header{
+  display: block;
+  font-size: 1.2em;
+  margin-block-start: 0.67em;
+  margin-block-end: 0.67em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+  margin-left: 1rem;
+}
+
+.starred-ideas-label {
+  display: block;
+  margin-block-start: 1.33em;
+  margin-block-end: 1.33em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+  margin-left: .5rem;
+}
+
+.starred-ideas-button {
   background-color: #5356A4;
   color: #E9E9F3;
   border: 0px;
   font-size: 16px;
   font-weight: bold;
   padding: 15px;
+  width: 12.5rem;
+  margin-bottom: 1rem;
+  margin-left: .5rem;
 }
 
 .main-page-form {
