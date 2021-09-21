@@ -9,6 +9,7 @@ var ideaForm = document.querySelector('.main-page-form');
 var commentForm = document.querySelector('.comment-form');
 var commentInput = document.querySelector('.comment-input');
 var addACommentButton = document.querySelector('#save-comment-button');
+
 //Event Listeners
 saveButton.addEventListener('click', createIdeaCard);
 ideaCardGrid.addEventListener('click', handleIdeaCardGridClick);
@@ -17,8 +18,11 @@ bodyInput.addEventListener('keyup', validateUserInput);
 searchBox.addEventListener('keyup', activeSearchFilter);
 showStarredIdeasButton.addEventListener('click', showStarredIdeas);
 commentInput.addEventListener('keyup', validateUserComment);
+addACommentButton.addEventListener('click', createIdeaComment);
 
 var ideas = [];
+var allComments = [];
+var ideaIdWithComment;
 persistOnPageLoad();
 
 //Event Handlers
@@ -115,7 +119,10 @@ function favoriteIdeaCard(ideaId) {
 }
 
 function handleIdeaCardGridClick(event) {
-  var ideaId = Number(event.target.closest('.box-container').id);
+  var ideaId;
+  if (event.target.closest('.box-container')) {
+    ideaId = Number(event.target.closest('.box-container').id);
+  }
   if (event.target.classList.contains('delete-btn')) {
     deleteIdeaCard(ideaId);
   }
@@ -125,7 +132,8 @@ function handleIdeaCardGridClick(event) {
   }
 
   if (event.target.classList.contains('comment-btn')) {
-    createIdeaComment(ideaId);
+    showCommentForm();
+    ideaIdWithComment = ideaId;
   }
 
   displayCards();
@@ -133,17 +141,30 @@ function handleIdeaCardGridClick(event) {
 
 function persistOnPageLoad() {
   var ideasFromStorage = localStorage.getItem('stringifiedIdeas');
+  var commentsFromStorage = localStorage.getItem('stringifiedComments');
+  
   if (ideasFromStorage !== null) {
     var parsedIdeasFromStorage = JSON.parse(ideasFromStorage);
+    var parsedComments = JSON.parse(commentsFromStorage);
+
     for (var i = 0; i < parsedIdeasFromStorage.length; i++) {
       var title = parsedIdeasFromStorage[i].title;
       var body = parsedIdeasFromStorage[i].body;
       var id = parsedIdeasFromStorage[i].id;
       var star = parsedIdeasFromStorage[i].star;
-      var comments = parsedIdeasFromStorage[i].comments;//
-
-      var reinstantiatedIdea = new Idea(title, body, id, star, []);//
+      
+      var ideaComments = [];
+      for (var j = 0; j < parsedComments.length; j++) {
+        if (parsedComments[j].ideaId === id) {
+          var content = parsedComments[j].content;
+          var reinstantiatedComment = new Comment(content, id);
+          ideaComments.push(reinstantiatedComment);
+          allComments.push(reinstantiatedComment);
+        }
+      }
+      var reinstantiatedIdea = new Idea(title, body, id, star, ideaComments);
       ideas.push(reinstantiatedIdea);
+
     }
     displayCards();
   }
@@ -174,22 +195,28 @@ function showStarredIdeas() {
   displayCards();
 }
 
-function createIdeaComment(ideaId) {
-  showCommentForm();
+function createIdeaComment(event) {
+  event.preventDefault();
+  
+  var content = commentInput.value;
+  var savedComment = new Comment(content, ideaIdWithComment);
+  allComments.push(savedComment);
 
-  // var comments = [];
+  for (var i = 0; i < ideas.length; i++) {
+    if (ideas[i].id === ideaIdWithComment && !ideas[i].comments.length) {
+      ideas[i].comments = [savedComment];
+      ideas[i].saveToStorage(ideas);
 
-  // var savedIdea = new Idea(userTitle, userBody, id, star, comments);
-  // ideas.push(savedIdea);
-  // displayCards();
-  // savedIdea.saveToStorage(ideas);
-  // if(titleInput && bodyInput){
-  //   titleInput.value = "";
-  //   bodyInput.value = "";
-  //   saveButton.disabled = true;
-  //once comment has been added, I want to go back to the main page
+    } else if (ideas[i].id === ideaIdWithComment && ideas[i].comments.length) {
+      ideas[i].comments.push(savedComment);
+      ideas[i].saveToStorage(ideas);
+    }
+  }
+  savedComment.saveToStorage(allComments);
+  commentInput.value = "";
+  addACommentButton.disabled = true;
 }
-
+ 
 function showCommentForm() {
   ideaForm.classList.add('hidden');
   commentForm.classList.remove('hidden');
@@ -202,7 +229,3 @@ function validateUserComment() {
     addACommentButton.disabled = true;
   }
 }
-
-
-// When I open the comment form on a card, type something in, and click “Add Comment”,
-// The text typed in is now a comment attached to this card
