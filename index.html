@@ -15,7 +15,7 @@
       </div>
     </aside>
     <main class="form-container">
-      <form class="main-page-form">
+      <form class="main-page-form" id="main-page-form">
         <label for="main-input-title" class="title-label form-element">Title</label>
         <input type="text" class="main-input-title form-element" id="main-input-title"/>
         <label for="main-input-body" class="body-label form-element">Body</label>
@@ -30,7 +30,7 @@
           </span>
         </div>
       </form>
-      <form class="comment-form hidden">
+      <form class="comment-form hidden" id="comment-form">
         <label for="user-comment" class="form-element">Comment</label>
         <textarea class="comment-input form-element" id="user-comment"></textarea>
         <button class="save-comment form-element button" id="save-comment-button" disabled>
@@ -39,7 +39,7 @@
         <button class="cancel form-element button" id="cancel-button">
           Cancel
         </button>
-        <ul class="list-of-comments form-element">
+        <ul class="list-of-comments form-element" id="list-of-comments">
         </ul>
       </form>
       <section class="idea-container" id="idea-container">

@@ -5,12 +5,12 @@ var ideaCardGrid = document.querySelector('#idea-container');
 var deleteButton = document.querySelector('#delete-btn');
 var searchBox = document.querySelector('#search-box');
 var showStarredIdeasButton = document.querySelector('#show-starred-ideas-button');
-var ideaForm = document.querySelector('.main-page-form');
-var commentForm = document.querySelector('.comment-form');
-var commentInput = document.querySelector('.comment-input');
+var ideaForm = document.querySelector('#main-page-form');
+var commentForm = document.querySelector('#comment-form');
+var commentInput = document.querySelector('#user-comment');
 var addACommentButton = document.querySelector('#save-comment-button');
 var cancelButton = document.querySelector('#cancel-button');
-var listOfComments = document.querySelector('.list-of-comments');
+var listOfComments = document.querySelector('#list-of-comments');
 
 window.addEventListener('load', persistOnPageLoad);
 saveButton.addEventListener('click', createIdeaCard);
@@ -140,7 +140,7 @@ function handleIdeaCardGridClick(event) {
 function persistOnPageLoad() {
   var ideasFromStorage = localStorage.getItem('stringifiedIdeas');
   var commentsFromStorage = localStorage.getItem('stringifiedComments');
-  
+
   if (ideasFromStorage !== null) {
     var parsedIdeasFromStorage = JSON.parse(ideasFromStorage);
     var parsedComments = JSON.parse(commentsFromStorage);
@@ -150,7 +150,7 @@ function persistOnPageLoad() {
       var body = parsedIdeasFromStorage[i].body;
       var id = parsedIdeasFromStorage[i].id;
       var star = parsedIdeasFromStorage[i].star;
-      
+
       var ideaComments = [];
       for (var j = 0; j < parsedComments.length; j++) {
         if (parsedComments[j].ideaId === id) {
@@ -195,7 +195,7 @@ function showStarredIdeas() {
 
 function createIdeaComment(event) {
   event.preventDefault();
-  
+
   var content = commentInput.value;
   var savedComment = new Comment(content, ideaIdWithComment);
   allComments.push(savedComment);
@@ -215,7 +215,7 @@ function createIdeaComment(event) {
   addACommentButton.disabled = true;
   displayComments();
 }
- 
+
 function showCommentForm() {
   ideaForm.classList.add('hidden');
   commentForm.classList.remove('hidden');
@@ -240,7 +240,7 @@ function displayComments() {
   listOfComments.innerHTML = "";
   for (var i = 0; i < allComments.length; i++) {
     if (allComments[i].ideaId === ideaIdWithComment) {
-      listOfComments.innerHTML += `<li>${allComments[i].content}</li>`; 
+      listOfComments.innerHTML += `<li>${allComments[i].content}</li>`;
     }
   }
 }
