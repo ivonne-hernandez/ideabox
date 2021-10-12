@@ -152,12 +152,14 @@ function persistOnPageLoad() {
       var star = parsedIdeasFromStorage[i].star;
 
       var ideaComments = [];
-      for (var j = 0; j < parsedComments.length; j++) {
-        if (parsedComments[j].ideaId === id) {
-          var content = parsedComments[j].content;
-          var reinstantiatedComment = new Comment(content, id);
-          ideaComments.push(reinstantiatedComment);
-          allComments.push(reinstantiatedComment);
+      if (parsedComments !== null) {
+        for (var j = 0; j < parsedComments.length; j++) {
+          if (parsedComments[j].ideaId === id) {
+            var content = parsedComments[j].content;
+            var reinstantiatedComment = new Comment(content, id);
+            ideaComments.push(reinstantiatedComment);
+            allComments.push(reinstantiatedComment);
+          }
         }
       }
       var reinstantiatedIdea = new Idea(title, body, id, star, ideaComments);
